@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { isAuthenticated, hasRole } from "../../auth/auth.service";
 import {
   handleAllGetData,
   handleCreateValue,
@@ -10,18 +11,18 @@ import {
 const router = Router();
 
 // Get /api/values
-router.get('/', handleAllGetData);
+router.get('/', isAuthenticated, handleAllGetData);
 
 // Get /api/values/:id
-router.get('/:id', handleGetValue);
+router.get('/:id', isAuthenticated, handleGetValue);
 
 // Post /api/values
-router.post('/', handleCreateValue);
+router.post('/', isAuthenticated, handleCreateValue);
 
 // Patch /api/values/:id
-router.patch('/:id', handleUpdateValue);
+router.patch('/:id', isAuthenticated, hasRole(['ADMIN']), handleUpdateValue);
 
 // Delete /api/values/:i/
-router.delete('/:id', handleDeleteValue);
+router.delete('/:id', isAuthenticated, hasRole(['ADMIN']), handleDeleteValue);
 
 export default router;

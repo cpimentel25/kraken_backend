@@ -1,36 +1,30 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model, Document, DocumentDefinition } from "mongoose";
+import bcrypt from "bcryptjs";
+import { UserProfileType } from "./user.types";
 
-const Categories = new Schema({
-  Services: {
-    type: String,
-    default: 'Service'
-  },
-  Taxes: {
-    type: String,
-    default: 'Taxes'
-  }
-}, { _id: false, versionKey: false });
+export interface UserDocument extends Document {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string; // hash -> SH256
+  role: 'USER' | 'ADMIN' | 'GUEST';
+  isActive: boolean;
+  passwordResetToken?: string;
+  passwordResetExpires?: Date;
+  createdAt: Date;
+  updateAt?: Date;
 
-// const values = new Schema({
-//   value: [{
-//     type: Number,
-//     required: true,}],
-//   date: {
-//     type: Date,
-//     default: Date.now
-//   },
-//   categorie: [Categories],
-// }, {
-//   timestamps: true,
-//   versionKey: false,
-// });
+  fullName: string;
+  profile: UserProfileType;
+  comparePassword: (password: string) => Promise<boolean>;
+};
 
 const UserSchema = new Schema({
-  firstname: {
+  firstName: {
     type: String,
     required: [true, 'Please provide a first name'],
   },
-  lastname: {
+  lastName: {
     type: String,
     required: [true, 'Please provide a last name'],
   },
@@ -46,7 +40,7 @@ const UserSchema = new Schema({
     required: true,
     min: 6,
   },
-  rol: {
+  role: {
     type: String,
     enum: ['USER', 'ADMIN', 'GUEST'],
     default: 'USER',
@@ -55,14 +49,68 @@ const UserSchema = new Schema({
     type: Boolean,
     default: true, // <- Change to FALSE
   },
-  categories: [Categories],
-  // data: [values],
 }, {
   timestamps: true,
   versionKey: false,
 });
 
+async function save(this: UserDocument, next: Function) {
+  const user = this as UserDocument;
 
-const User = model('User', UserSchema);
+  try {
+    if (!user.isModified('password')) {
+      return next();
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(user.password, salt);
+
+    user.password = hash;
+  } catch (error: any) {
+    next(error);
+  }
+};
+
+// Middlewares
+UserSchema.pre('save', save);
+UserSchema.pre('update', save);
+
+// Virtuals
+UserSchema.virtual('fullName').get(function fullName(this: UserDocument) {
+  const { firstName, lastName } = this;
+  return `${firstName} ${lastName}`;
+});
+
+UserSchema.virtual('profile').get(function profile(this: UserDocument) {
+  const { firstName, lastName, email, role } = this;
+  return {
+    firstName,
+    lastName,
+    email,
+    role
+  };
+});
+
+// Methods
+async function comparePassword(this: UserDocument, candidatePassword: string, next: Function) {
+  const user = this;
+
+  try {
+    const isMatch = await bcrypt.compare(candidatePassword, user.password);
+    return isMatch;
+  } catch (error: any) {
+    next(error);
+    return false;
+  }
+};
+
+UserSchema.methods.comparePassword = comparePassword;
+
+const User = model<UserDocument>('User', UserSchema);
 
 export default User;
+
+// 1. Encript PASSWORD
+// 2. Middleware mongoose -> .pre('save');
+// 3. Compared PASSWORD witch HASH saved
+// 4. Method mongoose -> comparePassword

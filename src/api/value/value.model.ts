@@ -1,14 +1,29 @@
 import { Schema, model } from "mongoose";
 
+export interface ValueDocument extends Document {
+  value: number;
+  currency: string;
+  categorie: string;
+  createdBy: string;
+  createdAt: Date;
+  updateAt: Date;
+  guest: string;
+};
+
 const ValueSchema = new Schema({
   value: [{
     type: Number,
     required: true,
   }],
-  date: {
-    type: Date,
-    default: Date.now
+  currency: {
+    type: String,
+    enum: ['USD', 'COL'],
+    default: 'USD',
   },
+  // date: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
   categorie: {
     type: String,
     enum: [
@@ -18,9 +33,18 @@ const ValueSchema = new Schema({
       'Services',
       'Salary',
       'Rent',
-      'Unexpected'
+      'Unexpected',
     ],
-    default: 'Without category'
+    default: 'Without category',
+  },
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  guest: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
 }, {
   timestamps: true,
