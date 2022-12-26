@@ -14,7 +14,6 @@ export async function handleLoginUser(req: Request, res: Response, next: NextFun
 
   try {
     const user = await getUser({ email });
-    // console.log(user);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });

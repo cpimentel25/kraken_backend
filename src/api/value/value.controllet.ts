@@ -7,6 +7,7 @@ import {
   updateValue
 } from "./value.services";
 import { AuthRequest } from "../../auth/auth.types";
+import logger from "../../logger";
 
 
 export async function handleAllGetData(req: Request, res: Response) {
@@ -14,7 +15,7 @@ export async function handleAllGetData(req: Request, res: Response) {
     const value = await getAllValue();
     return res.status(200).json(value);
   } catch (error) {
-    console.log('handleAllGetData ~ error', error)
+    logger.error('handleAllGetData ~ error', error)
     return res.status(500).json(error);
   }
 };
@@ -55,7 +56,6 @@ export async function handleUpdateValue(req: Request, res: Response) {
 
 export async function handleDeleteValue(req: AuthRequest, res: Response) {
   const { id } = req.params;
-  console.log(req.user);
   try {
     const value = await deleteValue(id);
 

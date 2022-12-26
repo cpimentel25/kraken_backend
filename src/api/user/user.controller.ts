@@ -7,6 +7,7 @@ import {
   getUserById
 } from "./user.services";
 import * as dotenv from 'dotenv';
+import logger from "../../logger";
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ export async function handleAllGetUsers(req: Request, res: Response, next: NextF
     const users = await getAllUsers();
     return res.status(200).json(users)
   } catch (error) {
-    console.log('handleAllGetUsers ~ error', error)
+    logger.error('handleAllGetUsers ~ error', error)
     return res.status(500).json(error);
   }
 };
@@ -29,7 +30,7 @@ export async function handleGetUsers(req: Request, res: Response) {
     }
     return res.status(200).json(user.profile);
   } catch (error) {
-    console.log('handleGetUser ~ error', error);
+    logger.error('handleGetUser ~ error', error);
     return res.status(500).json(error);
   }
 };
@@ -52,7 +53,7 @@ export async function handleDeleteUsers(req: Request, res: Response) {
     await deleteUser(id);
     return res.status(200).json({ message: 'User delete' });
   } catch (error) {
-    console.log('handleDeleteUsers ~ error', error);
+    logger.error('handleDeleteUsers ~ error', error);
     return res.status(500).json(error);
   }
 };

@@ -3,6 +3,7 @@ import connectDB from './config/database';
 import routes from './routes';
 import * as dotenv from 'dotenv';
 import configExpress from './config/express';
+import logger from './logger';
 
 dotenv.config();
 
@@ -19,5 +20,5 @@ connectDB();
 routes(app);
 
 app.listen(PORT, () => {
-  console.log('Server is runing on port 8080');
+  logger.info('Server is runing on port 8080');
 });
