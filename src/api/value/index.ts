@@ -11,10 +11,10 @@ import {
 const router = Router();
 
 // Get /api/values
-router.get('/', isAuthenticated, handleAllGetData);
+router.get('/', handleAllGetData);
 
 // Get /api/values/:id
-router.get('/:id', isAuthenticated, handleGetValue);
+router.get('/:id', handleGetValue);
 
 // Post /api/values
 router.post('/', isAuthenticated, handleCreateValue);
