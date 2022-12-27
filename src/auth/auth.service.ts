@@ -40,8 +40,7 @@ export function verifyToken(token: string) {
 
 // isAuthenticated ->
 export async function isAuthenticated(req: AuthRequest, res: Response, next: NextFunction) {
-  // const token = req.headers?.authorization?.split(' ')[1];
-  const token = localStorage.getItem('token');
+  const token = req.headers?.authorization?.split(' ')[1];
 
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized' });
