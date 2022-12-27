@@ -82,12 +82,14 @@ UserSchema.virtual('fullName').get(function fullName(this: UserDocument) {
 });
 
 UserSchema.virtual('profile').get(function profile(this: UserDocument) {
-  const { firstName, lastName, email, role } = this;
+  const { id, firstName, lastName, email, role, createdAt } = this;
   return {
+    id,
     firstName,
     lastName,
     email,
-    role
+    role,
+    createdAt
   };
 });
 
