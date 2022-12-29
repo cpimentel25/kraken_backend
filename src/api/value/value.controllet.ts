@@ -15,10 +15,8 @@ export async function handleAllGetData(req: Request, res: Response) {
   const userId = req.headers?.createdBy as string;
   const createdBy = new mongoose.Schema.Types.ObjectId(userId);
 
-  console.log(createdBy);
-
   try {
-    const value = await getAllValue();
+    const value = await getAllValue(createdBy);
     return res.status(200).json(value);
   } catch (error) {
     logger.error('handleAllGetData ~ error', error)
