@@ -8,17 +8,21 @@ import {
 } from "./value.services";
 import { AuthRequest } from "../../auth/auth.types";
 import logger from "../../logger";
-import mongoose, { ObjectId, Schema } from "mongoose";
+import mongoose, { isValidObjectId } from "mongoose";
 
 mongoose.set('strictQuery', false); // -> Error ?
 
 export async function handleAllGetData(req: Request, res: Response) {
   const userId = req.headers?.createdBy as string;
-  const createdBy = new Schema.Types.ObjectId(userId);
+  const createdBy = new mongoose.Types.ObjectId(userId);
 
-  console.log(createdBy)
+  console.log(userId) // -> string ?
+  console.log(createdBy); // ->
+  console.log(typeof(createdBy)); // -> Object ?
+  console.log(isValidObjectId(createdBy)); // -> true /false
 
   try {
+    //@ts-ignore
     const value = await getAllValue(createdBy);
     return res.status(200).json(value);
   } catch (error) {
