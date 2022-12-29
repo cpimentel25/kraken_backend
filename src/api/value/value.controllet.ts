@@ -13,8 +13,8 @@ import mongoose, { isValidObjectId } from "mongoose";
 mongoose.set('strictQuery', false); // -> Error ?
 
 export async function handleAllGetData(req: Request, res: Response) {
-  const userId = req.headers?.createdBy as string;
-  const createdBy = new mongoose.Types.ObjectId(userId);
+  const userId = req.headers?.createdBy as string; // -> undifined
+  const createdBy = new mongoose.Types.ObjectId(userId); // -> ObjectId
 
   console.log(userId) // -> undefined
   console.log(createdBy); // -> new ObjectId("63ad1c0b4dc8a21382b50d0d")
