@@ -1,9 +1,9 @@
-import { DocumentDefinition } from "mongoose";
+import { DocumentDefinition, ObjectId } from "mongoose";
 import Value, { ValueDocument } from "./value.model";
 
 
-export function getAllValue() {
-  return Value.find().sort({ createdAt: -1 })
+export function getAllValue(createdBy: ObjectId) {
+  return Value.find(createdBy).sort({ createdAt: -1 })
     .populate({ path: 'createdBy', select: 'firstName lastName' });
 };
 
