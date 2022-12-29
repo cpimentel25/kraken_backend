@@ -13,8 +13,8 @@ import logger from "../../logger";
 // mongoose.set('strictQuery', false); // -> Error ?
 
 export async function handleAllGetData(req: Request, res: Response) {
-  // const id = '63a32a8a3bb0260110a03f64';
-  const { id } = req.params;
+  const id = '63a32a8a3bb0260110a03f64';
+  // const { id } = req.params;
 
   // const userId = req.headers?.createdBy as string; // -> undifined {Dont work}
   // const createdBy = new mongoose.Types.ObjectId(userId); // -> ObjectId

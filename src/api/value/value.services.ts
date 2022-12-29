@@ -1,11 +1,11 @@
 import { DocumentDefinition } from "mongoose";
 import Value, { ValueDocument } from "./value.model";
 
-import {ObjectId} from 'mongodb'; // -> Test {Working!}
-const filter = {'createdBy': new ObjectId('63a32a8a3bb0260110a03f64')}; // -> Filter {Working!}
+import { ObjectId } from 'mongodb'; // -> Test {Working!}
 
+export function getAllValue(id: string) {
+  const filter = {'createdBy': new ObjectId(id)}; // -> Filter {Working!}
 
-export function getAllValue(filter: ObjectId) {
   return Value.find(filter).sort({ createdAt: -1 })
     .populate({ path: 'createdBy', select: 'firstName lastName' });
 };
