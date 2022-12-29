@@ -10,6 +10,8 @@ import { AuthRequest } from "../../auth/auth.types";
 import logger from "../../logger";
 import mongoose, { ObjectId, Schema } from "mongoose";
 
+mongoose.set('strictQuery', false); // -> Error ?
+
 export async function handleAllGetData(req: Request, res: Response) {
   const userId = req.headers?.createdBy as string;
   const createdBy = new Schema.Types.ObjectId(userId);
