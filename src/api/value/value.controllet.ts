@@ -8,22 +8,24 @@ import {
 } from "./value.services";
 import { AuthRequest } from "../../auth/auth.types";
 import logger from "../../logger";
-import mongoose, { isValidObjectId } from "mongoose";
 
-mongoose.set('strictQuery', false); // -> Error ?
+// import mongoose, { isValidObjectId } from "mongoose";
+// mongoose.set('strictQuery', false); // -> Error ?
 
 export async function handleAllGetData(req: Request, res: Response) {
-  const userId = req.headers?.createdBy as string; // -> undifined
-  const createdBy = new mongoose.Types.ObjectId(userId); // -> ObjectId
+  // const id = '63a32a8a3bb0260110a03f64';
+  const { id } = req.params;
 
-  console.log(userId) // -> undefined
-  console.log(createdBy); // -> new ObjectId("63ad1c0b4dc8a21382b50d0d")
-  console.log(typeof(createdBy)); // -> Object
-  console.log(isValidObjectId(createdBy)); // -> true
+  // const userId = req.headers?.createdBy as string; // -> undifined {Dont work}
+  // const createdBy = new mongoose.Types.ObjectId(userId); // -> ObjectId
+
+  // console.log(userId) // -> undefined {Dont work}
+  // console.log(createdBy); // -> new ObjectId("63ad1c0b4dc8a21382b50d0d")
+  // console.log(typeof(createdBy)); // -> Object
+  // console.log(isValidObjectId(createdBy)); // -> true
 
   try {
-    //@ts-ignore
-    const value = await getAllValue(createdBy);
+    const value = await getAllValue(id);
     return res.status(200).json(value);
   } catch (error) {
     logger.error('handleAllGetData ~ error', error)
