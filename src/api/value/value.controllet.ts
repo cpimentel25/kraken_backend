@@ -16,10 +16,10 @@ export async function handleAllGetData(req: Request, res: Response) {
   const userId = req.headers?.createdBy as string;
   const createdBy = new mongoose.Types.ObjectId(userId);
 
-  console.log(userId) // -> string ?
-  console.log(createdBy); // ->
-  console.log(typeof(createdBy)); // -> Object ?
-  console.log(isValidObjectId(createdBy)); // -> true /false
+  console.log(userId) // -> undefined
+  console.log(createdBy); // -> new ObjectId("63ad1c0b4dc8a21382b50d0d")
+  console.log(typeof(createdBy)); // -> Object
+  console.log(isValidObjectId(createdBy)); // -> true
 
   try {
     //@ts-ignore
