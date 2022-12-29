@@ -10,13 +10,13 @@ import { AuthRequest } from "../../auth/auth.types";
 import logger from "../../logger";
 
 export async function handleAllGetData(req: Request, res: Response) {
-  // const id = '63a32a8a3bb0260110a03f64';
+  const id = '63a32a8a3bb0260110a03f64';
 
   const data = req.body;
   console.log(data);
 
   try {
-    const value = await getAllValue(data);
+    const value = await getAllValue(id);
     return res.status(200).json(value);
   } catch (error) {
     logger.error('handleAllGetData ~ error', error)
