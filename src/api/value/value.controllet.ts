@@ -16,7 +16,7 @@ export async function handleAllGetData(req: Request, res: Response) {
   console.log(data);
 
   try {
-    const value = await getAllValue(id);
+    const value = await getAllValue(data);
     return res.status(200).json(value);
   } catch (error) {
     logger.error('handleAllGetData ~ error', error)
