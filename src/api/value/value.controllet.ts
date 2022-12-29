@@ -8,12 +8,11 @@ import {
 } from "./value.services";
 import { AuthRequest } from "../../auth/auth.types";
 import logger from "../../logger";
-import mongoose from "mongoose";
-
+import mongoose, { ObjectId, Schema } from "mongoose";
 
 export async function handleAllGetData(req: Request, res: Response) {
   const userId = req.headers?.createdBy as string;
-  const createdBy = new mongoose.Schema.Types.ObjectId(userId);
+  const createdBy = new Schema.Types.ObjectId(userId);
 
   console.log(createdBy)
 

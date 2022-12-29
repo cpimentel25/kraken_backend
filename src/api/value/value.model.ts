@@ -1,10 +1,10 @@
-import { Schema, model } from "mongoose";
+import { ObjectId, Schema, model } from "mongoose";
 
 export interface ValueDocument extends Document {
   value: number;
   currency: string;
   categorie: string;
-  createdBy: string;
+  createdBy: ObjectId; // -> string to ObjectId
   createdAt: Date;
   updateAt: Date;
   guest: string;
@@ -20,10 +20,6 @@ const ValueSchema = new Schema({
     enum: ['USD', 'COL'],
     default: 'USD',
   },
-  // date: {
-  //   type: Date,
-  //   default: Date.now,
-  // },
   categorie: {
     type: String,
     enum: [
