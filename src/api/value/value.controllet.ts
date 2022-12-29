@@ -9,20 +9,11 @@ import {
 import { AuthRequest } from "../../auth/auth.types";
 import logger from "../../logger";
 
-// import mongoose, { isValidObjectId } from "mongoose";
-// mongoose.set('strictQuery', false); // -> Error ?
-
 export async function handleAllGetData(req: Request, res: Response) {
   const id = '63a32a8a3bb0260110a03f64';
-  // const { id } = req.params;
 
-  // const userId = req.headers?.createdBy as string; // -> undifined {Dont work}
-  // const createdBy = new mongoose.Types.ObjectId(userId); // -> ObjectId
-
-  // console.log(userId) // -> undefined {Dont work}
-  // console.log(createdBy); // -> new ObjectId("63ad1c0b4dc8a21382b50d0d")
-  // console.log(typeof(createdBy)); // -> Object
-  // console.log(isValidObjectId(createdBy)); // -> true
+  const data = req.body;
+  console.log(data);
 
   try {
     const value = await getAllValue(id);

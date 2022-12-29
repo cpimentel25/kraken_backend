@@ -1,7 +1,6 @@
 import { DocumentDefinition } from "mongoose";
 import Value, { ValueDocument } from "./value.model";
-
-import { ObjectId } from 'mongodb'; // -> Test {Working!}
+import { ObjectId } from 'mongodb';
 
 export function getAllValue(id: string) {
   const filter = {'createdBy': new ObjectId(id)}; // -> Filter {Working!}
