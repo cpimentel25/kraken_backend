@@ -77,3 +77,16 @@ export function hasRole(allowRoles: Roles) {
     return true;
   };
 };
+
+// createdby ->
+export async function isCreatedbyId(req: Request, res: Response, next: NextFunction) {
+  const search = req.headers?.createdby;
+  console.log(search);
+
+  if(search === null) {
+    return res.status(404).json({ message: 'Need rReload' });
+  }
+
+  next();
+  return search;
+}

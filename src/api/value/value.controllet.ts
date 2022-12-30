@@ -11,14 +11,12 @@ import logger from "../../logger";
 
 export async function handleAllGetData(req: Request, res: Response) {
   // const id = '63a32a8a3bb0260110a03f64';
-  const data = req.body;
-  console.log(data);
+  // const data = req.body;
 
-  const search = req.headers?.createdby;
-  console.log(search);
+  const id = req.headers?.createdby as string;
 
   try {
-    const value = await getAllValue(data);
+    const value = await getAllValue(id);
     return res.status(200).json(value);
   } catch (error) {
     logger.error('handleAllGetData ~ error', error)
