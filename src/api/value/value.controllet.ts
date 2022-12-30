@@ -14,7 +14,7 @@ export async function handleAllGetData(req: Request, res: Response) {
   const data = req.body;
   console.log(data);
 
-  const search = req.headers;
+  const search = req.headers?.createdby;
   console.log(search);
 
   try {
