@@ -4,7 +4,6 @@ import { ObjectId } from 'mongodb';
 
 export function getAllValue(id: ObjectId) {
   // const filter = {'createdBy': new ObjectId(id)}; // -> Filter {Working!}
-
   return Value.find(id).sort({ createdAt: -1 })
     .populate({ path: 'createdBy', select: 'firstName lastName' });
 };

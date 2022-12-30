@@ -10,10 +10,12 @@ import { AuthRequest } from "../../auth/auth.types";
 import logger from "../../logger";
 
 export async function handleAllGetData(req: Request, res: Response) {
-  const id = '63a32a8a3bb0260110a03f64';
-
+  // const id = '63a32a8a3bb0260110a03f64';
   const data = req.body;
   console.log(data);
+
+  const search = req.headers;
+  console.log(search);
 
   try {
     const value = await getAllValue(data);
