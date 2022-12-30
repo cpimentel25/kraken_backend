@@ -11,7 +11,6 @@ import logger from "../../logger";
 
 export async function handleAllGetData(req: Request, res: Response) {
   const id = req.headers?.createdby as string;
-
   try {
     const value = await getAllValue(id);
     return res.status(200).json(value);

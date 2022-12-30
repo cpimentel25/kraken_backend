@@ -80,13 +80,13 @@ export function hasRole(allowRoles: Roles) {
 
 // createdBy ->
 export async function isCreatedbyId(req: Request, res: Response, next: NextFunction) {
-  const search = req.headers?.createdby;
-  console.log(search);
+  const id = req.headers?.createdby;
+  console.log(id);
 
-  if(search === null) {
+  if(id === null || id === undefined) {
     return res.status(404).json({ message: 'Need reload' });
-  }
+  };
 
   next();
-  return search;
+  return true;
 }
