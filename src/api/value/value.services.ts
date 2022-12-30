@@ -2,9 +2,9 @@ import { DocumentDefinition } from "mongoose";
 import Value, { ValueDocument } from "./value.model";
 import { ObjectId } from 'mongodb';
 
-export function getAllValue(id: ObjectId) {
-  // const filter = {'createdBy': new ObjectId(id)}; // -> Filter {Working!}
-  return Value.find(id).sort({ createdAt: -1 })
+export function getAllValue(id: string) {
+  const filter = {'createdBy': new ObjectId(id)}; // -> Filter {Working!}
+  return Value.find(filter).sort({ createdAt: -1 })
     .populate({ path: 'createdBy', select: 'firstName lastName' });
 };
 
