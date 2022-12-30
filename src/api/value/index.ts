@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isAuthenticated, hasRole, isCreatedbyId } from "../../auth/auth.service";
+import { isAuthenticated, hasRole } from "../../auth/auth.service";
 import {
   handleAllGetData,
   handleCreateValue,
@@ -11,7 +11,7 @@ import {
 const router = Router();
 
 // Get /api/values
-router.get('/', isCreatedbyId, handleAllGetData);
+router.get('/', handleAllGetData);
 
 // Get /api/values/:id
 router.get('/:id', handleGetValue);
