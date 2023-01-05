@@ -1,12 +1,14 @@
 import { Application } from 'express';
 import user from './api/user';
 import value from './api/value';
+import categorie from './api/categorie';
 import authLocal from './auth/local';
 import healthCheck from './api/healthCheck';
 
 function routes(app: Application) {
   app.use('/api/users', user);
   app.use('/api/values', value);
+  app.use('api/categorie', categorie);
   app.use('/api/healthCheck', healthCheck);
   // AUTH route
   app.use('/auth/local', authLocal);

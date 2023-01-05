@@ -26,6 +26,7 @@ export async function handleGetValue(req: Request, res: Response) {
     const value = await getValueById(id);
     return res.status(200).json(value)
   } catch (error) {
+    logger.error('handleGetValue ~ error', error);
     return res.status(500).json(error);
   }
 };

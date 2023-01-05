@@ -22,16 +22,17 @@ const ValueSchema = new Schema({
   },
   categorie: {
     type: String,
-    enum: [
-      'Without category',
-      'Other income',
-      'Taxes',
-      'Services',
-      'Salary',
-      'Rent',
-      'Unexpected',
-    ],
-    default: 'Without category',
+    ref: 'Categorie',
+    // enum: [
+    //   'Without category',
+    //   'Other income',
+    //   'Taxes',
+    //   'Services',
+    //   'Salary',
+    //   'Rent',
+    //   'Unexpected',
+    // ],
+    // default: 'Without category',
   },
   createdBy: {
     type: Schema.Types.ObjectId,
