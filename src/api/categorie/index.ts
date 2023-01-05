@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { handleAllGetCategorie, handleCreateCategorie, handleDeleteCategorie, handleGetCategorie, handleUpdateCategorie } from "./categorie.controller";
+import { handleAllGetCategorie,
+  handleCreateCategorie,
+  handleDeleteCategorie,
+  handleGetCategorie,
+  handleUpdateCategorie
+} from "./categorie.controller";
 import { isAuthenticated } from "../../auth/auth.service";
 
 const router = Router();
