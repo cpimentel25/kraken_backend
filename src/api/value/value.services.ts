@@ -12,7 +12,6 @@ export function getValueById(id: string) {
   const value = Value.findById(id)
     .populate({ path: 'createdBy', select: 'firstName lastName' })
     .populate({ path: 'guest', select: 'firstName lastName' });
-  // .populate('createdBy');
   return value;
 };
 
@@ -24,7 +23,6 @@ export function createValue(
 
 export function updateValue(id: string, value: DocumentDefinition<ValueDocument>) {
   return Value.findByIdAndUpdate(id, value, { new: true });
-  // return updateValue;
 };
 
 export function deleteValue(id: string) {

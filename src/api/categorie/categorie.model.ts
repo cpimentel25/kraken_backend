@@ -1,5 +1,4 @@
-import mongoose, { Schema, model, Document, DocumentDefinition, ObjectId } from "mongoose";
-import bcrypt from "bcryptjs";
+import mongoose, { Schema, model, Document, ObjectId } from "mongoose";
 
 export interface CategorieDocument extends Document {
   name: string;
@@ -21,6 +20,14 @@ const CategorieSchema = new Schema({
 }, {
   timestamps: true,
   versionKey: false,
+});
+
+// Virtuals
+CategorieSchema.virtual('categories').get(function categories(this: CategorieDocument) {
+  const { name } = this;
+  return {
+    name
+  };
 });
 
 const Categorie = model<CategorieDocument>('Categorie', CategorieSchema);

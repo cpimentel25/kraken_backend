@@ -1,8 +1,9 @@
 import { DocumentDefinition, FilterQuery } from "mongoose";
 import Categorie, { CategorieDocument } from "./categorie.model";
 
-export function getAllCategorie() {
-  return Categorie.find().sort({ name: 1 });
+export function getAllCategorie(id: string) {
+  const filter = {'createdBy': id};
+  return Categorie.find(filter).sort({ name: 1 });
 };
 
 export function getCategorieById(id: string) {

@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, Document, DocumentDefinition } from "mongoose";
+import mongoose, { Schema, model, Document, DocumentDefinition, ObjectId } from "mongoose";
 import bcrypt from "bcryptjs";
 import { UserProfileType } from "./user.types";
 
@@ -14,12 +14,19 @@ export interface UserDocument extends Document {
   createdAt: Date;
   updateAt?: Date;
 
+  Guests: string[];
+  inviteFor: string;
+
   fullName: string;
   profile: UserProfileType;
   comparePassword: (password: string) => Promise<boolean>;
 };
 
 const UserSchema = new Schema({
+  Guests: [{
+    type: String
+  }],  // -> Invitados
+  inviteFor: String, // -> Quien me invito
   firstName: {
     type: String,
     required: [true, 'Please provide a first name'],
@@ -54,7 +61,7 @@ const UserSchema = new Schema({
   versionKey: false,
 });
 
-async function save(this: UserDocument, next: Function) {
+async function save(this: UserDocument, next: Function) { // (1)
   const user = this as UserDocument;
 
   try {
@@ -72,7 +79,7 @@ async function save(this: UserDocument, next: Function) {
 };
 
 // Middlewares
-UserSchema.pre('save', save);
+UserSchema.pre('save', save); //(2)
 UserSchema.pre('update', save);
 
 // Virtuals
@@ -98,7 +105,7 @@ async function comparePassword(this: UserDocument, candidatePassword: string, ne
   const user = this;
 
   try {
-    const isMatch = await bcrypt.compare(candidatePassword, user.password);
+    const isMatch = await bcrypt.compare(candidatePassword, user.password); // (3)
     return isMatch;
   } catch (error: any) {
     next(error);
@@ -106,7 +113,7 @@ async function comparePassword(this: UserDocument, candidatePassword: string, ne
   }
 };
 
-UserSchema.methods.comparePassword = comparePassword;
+UserSchema.methods.comparePassword = comparePassword; // (4)
 
 const User = model<UserDocument>('User', UserSchema);
 

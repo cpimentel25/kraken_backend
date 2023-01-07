@@ -1,14 +1,22 @@
 
-import { NextFunction, Request, Response } from "express";
-import { createCategorie, deleteCategorie, getAllCategorie, getCategorieById, updateCategorie } from "./categorie.services";
+import { Request, Response } from "express";
+import {
+  createCategorie,
+  deleteCategorie,
+  getAllCategorie,
+  getCategorieById,
+  updateCategorie
+} from "./categorie.services";
 import * as dotenv from 'dotenv';
+import { AuthRequest } from "../../auth/auth.types";
 import logger from "../../logger";
 
 dotenv.config();
 
-export async function handleAllGetCategorie(req: Request, res: Response, next: NextFunction) {
+export async function handleAllGetCategorie(req: AuthRequest, res: Response) {
+  const id = req.user?._id;
   try {
-    const users = await getAllCategorie();
+    const users = await getAllCategorie(id);
     return res.status(200).json(users)
   } catch (error) {
     logger.error('handleAllGetUsers ~ error', error)
