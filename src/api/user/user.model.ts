@@ -54,7 +54,7 @@ const UserSchema = new Schema({
   },
   isActive: {
     type: Boolean,
-    default: true, // <- Change to FALSE
+    default: false,
   },
 }, {
   timestamps: true,
@@ -89,14 +89,15 @@ UserSchema.virtual('fullName').get(function fullName(this: UserDocument) {
 });
 
 UserSchema.virtual('profile').get(function profile(this: UserDocument) {
-  const { id, firstName, lastName, email, role, createdAt } = this;
+  const { id, firstName, lastName, email, role, createdAt, isActive } = this;
   return {
     id,
     firstName,
     lastName,
     email,
     role,
-    createdAt
+    createdAt,
+    isActive
   };
 });
 

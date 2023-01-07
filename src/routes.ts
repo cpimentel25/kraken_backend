@@ -9,8 +9,9 @@ function routes(app: Application) {
   app.use('/api/users', user);
   app.use('/api/values', value);
   app.use('api/categorie', categorie);
+  // Health check server ->
   app.use('/api/healthCheck', healthCheck);
-  // AUTH route
+  // Auth route ->
   app.use('/auth/local', authLocal);
 };
 
