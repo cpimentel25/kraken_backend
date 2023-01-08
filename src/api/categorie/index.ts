@@ -16,7 +16,7 @@ router.get('/', isAuthenticated, handleAllGetCategorie);
 router.get('/:id', isAuthenticated, handleGetCategorie);
 
 // Post /api/categorie
-router.post('/', handleCreateCategorie);
+router.post('/', isAuthenticated, handleCreateCategorie);
 
 // Patch /api/categorie/:id
 router.patch('/:id', isAuthenticated, handleUpdateCategorie);
