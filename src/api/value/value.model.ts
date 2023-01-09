@@ -4,6 +4,7 @@ export interface ValueDocument extends Document {
   value: number;
   currency: string;
   categorie: string;
+  description: string;
   createdBy: ObjectId; // -> string to ObjectId
   createdAt: Date;
   updateAt: Date;
@@ -23,6 +24,9 @@ const ValueSchema = new Schema({
   categorie: {
     type: String,
     ref: 'Categorie',
+  },
+  description: {
+    type: String,
   },
   createdBy: {
     type: Schema.Types.ObjectId,

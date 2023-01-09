@@ -2,8 +2,9 @@ import { DocumentDefinition, FilterQuery } from "mongoose";
 import Categorie, { CategorieDocument } from "./categorie.model";
 
 export function getAllCategorie(id: string) {
-  const filter = {'createdBy': id};
-  return Categorie.find(filter).sort({ name: 1 });
+  const filter = { 'createdBy': id };
+  return Categorie.find(filter).sort({ name: 1 })
+    .populate({ path: 'createdBy' });
 };
 
 export function getCategorieById(id: string) {

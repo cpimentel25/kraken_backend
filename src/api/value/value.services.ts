@@ -3,7 +3,7 @@ import Value, { ValueDocument } from "./value.model";
 // import { ObjectId } from 'mongodb';
 
 export function getAllValue(id: string) {
-  const filter = {'createdBy': id}; // -> Filter {Working!}
+  const filter = { 'createdBy': id }; // -> Filter {Working!}
   return Value.find(filter).sort({ createdAt: -1 })
     .populate({ path: 'createdBy', select: 'firstName lastName' });
 };

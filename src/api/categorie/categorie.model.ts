@@ -16,7 +16,7 @@ const CategorieSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-  },
+  }
 }, {
   timestamps: true,
   versionKey: false,
@@ -26,7 +26,7 @@ const CategorieSchema = new Schema({
 CategorieSchema.virtual('categories').get(function categories(this: CategorieDocument) {
   const { name } = this;
   return {
-    name
+    name,
   };
 });
 
