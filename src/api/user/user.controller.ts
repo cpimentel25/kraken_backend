@@ -4,7 +4,8 @@ import {
   createUser,
   deleteUser,
   getAllUsers,
-  getUserById
+  getUserById,
+  updateUser
 } from "./user.services";
 import * as dotenv from 'dotenv';
 import logger from "../../logger";
@@ -45,7 +46,16 @@ export async function handleCreateUsers(req: Request, res: Response) {
   }
 };
 
-export async function handleUpdateUsers(req: Request, res: Response) { };
+export async function handleUpdateUsers(req: Request, res: Response) {
+  const { id } = req.params;
+  const data = req.body;
+  try {
+    const user = await updateUser(id, data);
+    return res.status(201).json(user);
+  } catch (error: any) {
+    return res.status(500).json(error.message);
+  }
+};
 
 export async function handleDeleteUsers(req: Request, res: Response) {
   const { id } = req.params;

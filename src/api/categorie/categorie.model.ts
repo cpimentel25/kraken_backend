@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, Document, ObjectId } from "mongoose";
+import { Schema, model, Document, ObjectId } from "mongoose";
 
 export interface CategorieDocument extends Document {
   name: string;

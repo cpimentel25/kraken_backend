@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, Document, DocumentDefinition, ObjectId } from "mongoose";
+import { Schema, model, Document, DocumentDefinition, ObjectId } from "mongoose";
 import bcrypt from "bcryptjs";
 import { UserProfileType } from "./user.types";
 
