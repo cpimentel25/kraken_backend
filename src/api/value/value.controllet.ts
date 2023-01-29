@@ -4,6 +4,7 @@ import {
   deleteValue,
   getAllValue,
   getValueById,
+  updateRosterValue,
   updateValue
 } from "./value.services";
 import { AuthRequest } from "../../auth/auth.types";
@@ -31,12 +32,23 @@ export async function handleGetValue(req: Request, res: Response) {
   }
 };
 
-export async function handleCreateValue(req: Request, res: Response) {
+export async function handleCreateValue(req: any, res: Response) {
   const data = req.body;
+  const user = req.user;
+
   try {
+    const rosterValue = await updateRosterValue(data, user);
+
+    if (!rosterValue) {
+      console.log('Roster not found');
+      return res.status(404).json({ message: 'Roster not found' });
+    }
+
     const value = await createValue(data);
     return res.status(200).json(value);
+
   } catch (error: any) {
+    logger.error('handleCreateValue ~ error', error)
     return res.status(500).json(error.message);
   }
 };

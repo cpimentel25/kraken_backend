@@ -1,6 +1,6 @@
 import { DocumentDefinition } from "mongoose";
 import Value, { ValueDocument } from "./value.model";
-// import { ObjectId } from 'mongodb';
+import Roster from "../roster/roster.model";
 
 export function getAllValue(id: string) {
   const filter = { 'createdBy': id }; // -> Filter {Working!}
@@ -19,6 +19,22 @@ export function createValue(
   value: DocumentDefinition<Omit<ValueDocument, 'guest' | 'createdAt' | 'updateAt'>>
 ) {
   return Value.create(value);
+};
+
+export function updateRosterValue(
+  data: DocumentDefinition<Omit<ValueDocument, 'guest' | 'createdAt' | 'updateAt'>>,
+  user: any
+) {
+  const query = {
+    _id: data.roster,
+    createdBy: user._id
+  }
+
+  const update = {
+    $push: { values: data }
+  }
+
+  return Roster.findOneAndUpdate(query, update);
 };
 
 export function updateValue(id: string, value: DocumentDefinition<ValueDocument>) {

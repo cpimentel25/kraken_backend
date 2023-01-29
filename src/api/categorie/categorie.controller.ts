@@ -63,7 +63,7 @@ export async function handleDeleteCategorie(req: Request, res: Response) {
   const { id } = req.params;
   try {
     await deleteCategorie(id);
-    return res.status(200).json({ message: 'User delete' });
+    return res.status(200).json({ message: 'Categorie delete' });
   } catch (error) {
     logger.error('handleDeleteUsers ~ error', error);
     return res.status(500).json(error);

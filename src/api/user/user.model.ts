@@ -1,6 +1,6 @@
 import { Schema, model, Document, DocumentDefinition, ObjectId } from "mongoose";
-import bcrypt from "bcryptjs";
 import { UserProfileType } from "./user.types";
+import bcrypt from "bcryptjs";
 
 export interface UserDocument extends Document {
   firstName: string;

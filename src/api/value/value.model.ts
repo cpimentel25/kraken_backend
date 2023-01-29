@@ -1,17 +1,21 @@
 import { ObjectId, Schema, model } from "mongoose";
 
 export interface ValueDocument extends Document {
+  roster: string;
   value: number;
   currency: string;
   categorie: string;
   description: string;
   createdBy: ObjectId; // -> string to ObjectId
   createdAt: Date;
-  updateAt: Date;
-  guest: string;
+  updateAt?: Date;
 };
 
 const ValueSchema = new Schema({
+  roster: {
+    type: String,
+    ref: 'Roster',
+  },
   value: [{
     type: Number,
     required: true,
@@ -33,15 +37,11 @@ const ValueSchema = new Schema({
     ref: 'User',
     required: true,
   },
-  guest: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
 }, {
   timestamps: true,
   versionKey: false,
 });
 
-const Value = model('Value', ValueSchema);
+const Value = model<ValueDocument>('Value', ValueSchema);
 
 export default Value;
