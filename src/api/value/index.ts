@@ -14,7 +14,7 @@ const router = Router();
 router.get('/', isAuthenticated, handleAllGetData); // -> Dont user more! (Require Fix)
 
 // Get /api/values/:id
-router.get('/:id', handleGetValue);
+router.get('/:id', isAuthenticated, handleGetValue);
 
 // Post /api/values
 router.post('/', isAuthenticated, handleCreateValue);

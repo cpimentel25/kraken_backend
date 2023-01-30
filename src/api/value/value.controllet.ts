@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
   createValue,
   deleteValue,
+  findRoster,
   getAllValue,
   getValueById,
   updateRosterValue,
@@ -37,15 +38,16 @@ export async function handleCreateValue(req: any, res: Response) {
   const user = req.user;
 
   try {
-    const rosterValue = await updateRosterValue(data, user);
+    const rosterLive = findRoster(data, user);
 
-    if (!rosterValue) {
+    if (!rosterLive) {
       console.log('Roster not found');
       return res.status(404).json({ message: 'Roster not found' });
     }
 
     const value = await createValue(data);
-    return res.status(200).json(value);
+    const rosterValue = await updateRosterValue(value, user);
+    return res.status(200).json(rosterValue);
 
   } catch (error: any) {
     logger.error('handleCreateValue ~ error', error)

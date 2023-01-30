@@ -15,6 +15,18 @@ export function getValueById(id: string) {
   return value;
 };
 
+export function findRoster(
+  data: DocumentDefinition<ValueDocument>,
+  user: any
+) {
+  const query = {
+    _id: data.roster,
+    createdBy: user._id
+  }
+
+  return Roster.findOne(query);
+};
+
 export function createValue(
   value: DocumentDefinition<Omit<ValueDocument, 'guest' | 'createdAt' | 'updateAt'>>
 ) {
@@ -22,7 +34,7 @@ export function createValue(
 };
 
 export function updateRosterValue(
-  data: DocumentDefinition<Omit<ValueDocument, 'guest' | 'createdAt' | 'updateAt'>>,
+  data: DocumentDefinition<ValueDocument>,
   user: any
 ) {
   const query = {

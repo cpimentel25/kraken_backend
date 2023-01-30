@@ -13,7 +13,7 @@ export function getUserById(id: string) {
 export function getUser(filter: FilterQuery<UserDocument>) {
   const user = User.findOne(filter);
   return user;
-}
+};
 
 // export function getUserByField(field, value: string) {
 //   return User.find({ email: value });

@@ -21,7 +21,8 @@ const RosterSchema = new Schema({
     required: true,
   },
   values: {
-    type: Array,
+    type: Schema.Types.Array,
+    ref: 'Value'
   },
   Guests: [{
     type: String
