@@ -8,7 +8,7 @@ const router = Router();
 router.get('/', isAuthenticated, handleGetAllRoster);
 
 // Get /api/roster/:id
-router.get('/:id', isAuthenticated, );
+// router.get('/:id', isAuthenticated, );
 
 // Post /api/roster/
 router.post('/',isAuthenticated, handleCreateRoster);

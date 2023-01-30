@@ -11,7 +11,7 @@ import {
 const router = Router();
 
 // Get /api/values
-router.get('/', isAuthenticated, handleAllGetData);
+router.get('/', isAuthenticated, handleAllGetData); // -> Dont user more! (Require Fix)
 
 // Get /api/values/:id
 router.get('/:id', handleGetValue);

@@ -4,6 +4,7 @@ export interface RosterDocument extends Document {
   title: string;
   createdBy: ObjectId;
   values: string;
+  Guests: string[];
 
   createdAt: Date;
   updateAt?: Date;
@@ -22,6 +23,9 @@ const RosterSchema = new Schema({
   values: {
     type: Array,
   },
+  Guests: [{
+    type: String
+  }],
 }, {
   timestamps: true,
   versionKey: false,
@@ -29,9 +33,13 @@ const RosterSchema = new Schema({
 
 // Virtuals
 RosterSchema.virtual('Roster').get(function roster(this: RosterDocument) {
-  const { title } = this;
+  const { id, title, createdBy, createdAt, updateAt } = this;
   return {
+    id,
     title,
+    createdBy,
+    createdAt,
+    updateAt,
   }
 });
 

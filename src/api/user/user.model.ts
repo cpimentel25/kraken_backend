@@ -14,7 +14,7 @@ export interface UserDocument extends Document {
   createdAt: Date;
   updateAt?: Date;
 
-  Guests: string[];
+  // Guests: string[];
   inviteFor: string;
 
   fullName: string;
@@ -23,9 +23,9 @@ export interface UserDocument extends Document {
 };
 
 const UserSchema = new Schema({
-  Guests: [{
-    type: String
-  }],  // -> Invitados
+  // Guests: [{
+  //   type: String
+  // }],  // -> Invitados
   inviteFor: String, // -> Quien me invito
   firstName: {
     type: String,
