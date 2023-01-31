@@ -16,10 +16,10 @@ const ValueSchema = new Schema({
     type: String,
     ref: 'Roster',
   },
-  value: [{
+  value: {
     type: Number,
     required: true,
-  }],
+  },
   currency: {
     type: String,
     enum: ['USD', 'COL'],

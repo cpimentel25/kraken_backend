@@ -1,4 +1,4 @@
-import { DocumentDefinition } from "mongoose";
+import mongoose, { DocumentDefinition } from "mongoose";
 import Roster, { RosterDocument } from "./roster.model";
 
 export function getAllRoster(id: string) {
@@ -28,6 +28,25 @@ export function getValueRoster(userId: string, id: string) {
   return Roster
   .findOne(filter)
   .select({ values: 1, _id: 0 });
-    // .findOne(filter, { Guests: 0, _id: 0, title: 0, createdBy: 0, createdAt: 0, updatedAt: 0 })
-    // .populate({ path: 'values', select: [{ value: 1 }] });
+};
+
+export function getRosterTotalValues(userId: string, id: string) {
+  const filter = {
+    _id: new mongoose.Types.ObjectId(id),
+    createdBy: userId
+  }
+  const result = Roster
+    .aggregate([
+      { $match: filter },
+      { $unwind: "$values" },
+      { $group: { _id: "$values.roster" , total: { $sum: "$values.value" }}}
+    ]);
+
+    // -> aggregate mode2 ->
+    // .aggregate()
+    // .match(filter)
+    // .unwind({ path: '$values', preserveNullAndEmptyArrays: true })
+    // .group({ _id: '$roster', total: { $sum: '$values.value' }});
+
+  return result;
 };

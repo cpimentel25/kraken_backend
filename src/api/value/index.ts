@@ -14,7 +14,7 @@ const router = Router();
 router.get('/', isAuthenticated, handleAllGetData); // -> Dont user more! (Require Fix)
 
 // Get /api/values/:id
-router.get('/:id', isAuthenticated, handleGetValue);
+router.get('/:id', isAuthenticated, handleGetValue); // -> Dont user more! (Require Fix)
 
 // Post /api/values
 router.post('/', isAuthenticated, handleCreateValue);
@@ -23,6 +23,6 @@ router.post('/', isAuthenticated, handleCreateValue);
 router.patch('/:id', isAuthenticated, hasRole(['ADMIN']), handleUpdateValue);
 
 // Delete /api/values/:i/
-router.delete('/:id', isAuthenticated, hasRole(['ADMIN']), handleDeleteValue);
+router.delete('/:id', isAuthenticated, handleDeleteValue);
 
 export default router;

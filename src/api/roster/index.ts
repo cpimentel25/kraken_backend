@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { isAuthenticated } from "../../auth/auth.service";
 import {
+  getTotalValues,
   handleCreateRoster,
   handleGetAllRoster,
   handleGetAllValuesRoster,
@@ -15,8 +16,11 @@ router.get('/', isAuthenticated, handleGetAllRoster);
 // Get /api/roster/values
 router.get('/values', isAuthenticated, handleGetAllValuesRoster);
 
-// Get /api/roster/values:id
+// Get /api/roster/values/:id
 router.get('/values/:id', isAuthenticated, handleGetValueRoster);
+
+// Get /api/roster/values/total/:id
+router.get('/values/total/:id', isAuthenticated, getTotalValues)
 
 // Post /api/roster/
 router.post('/',isAuthenticated, handleCreateRoster);

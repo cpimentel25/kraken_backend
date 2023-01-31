@@ -2,7 +2,13 @@ import * as dotenv from 'dotenv';
 import { AuthRequest } from '../../auth/auth.types';
 import { Request, Response } from 'express';
 import logger from '../../logger';
-import { getAllRoster, getAllValuesRoster, getValueRoster, postCreateRoster } from './roster.services';
+import {
+  getAllRoster,
+  getAllValuesRoster,
+  getRosterTotalValues,
+  getValueRoster,
+  postCreateRoster
+} from './roster.services';
 
 dotenv.config();
 
@@ -34,7 +40,7 @@ export async function handleGetAllValuesRoster(req: AuthRequest, res: Response) 
     const values = await getAllValuesRoster(id);
     return res.status(200).json(values);
   } catch (error) {
-    logger.error('handleGetValueRoster ~ error', error)
+    logger.error('handleGetAllValuesRoster ~ error', error)
     return res.status(500).json(error);
   }
 };
@@ -50,3 +56,16 @@ export async function handleGetValueRoster(req: any, res: Response) {
     return res.status(500).json(error);
   }
 };
+
+export async function getTotalValues(req: any, res: Response) {
+  const userId = req.user?._id;
+  const { id } = req.params;
+  try {
+    const sumValues = await getRosterTotalValues(userId, id);
+    console.log(sumValues);
+    return res.status(200).json(sumValues);
+  } catch (error) {
+    logger.error('getTotalValues ~ error', error);
+    return res.status(500).json(error);
+  }
+}
