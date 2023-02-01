@@ -50,3 +50,14 @@ export function getRosterTotalValues(userId: string, id: string) {
 
   return result;
 };
+
+export function getLastValueRoster(userId: string, id: string) {
+  const filter = {
+    '_id': id,
+    'createdBy': userId
+  }
+  return Roster
+    .findOne(filter)
+    .select({ values: 1, Guests: 0, _id: 0, createdAt: 0, updatedAt: 0, title: 0, createdBy: 0 })
+    .slice('values', -1);
+}
