@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { getUser } from "../../api/user/user.services";
-import { singToken } from "../auth.service";
+import { getUser } from "../../api/user/user.services.js";
+import { singToken } from "../auth.service.js";
 
 /**
  * Returns a user profile and a JWT token signed by the app secret

@@ -9,13 +9,12 @@ export interface UserDocument extends Document {
   password: string; // hash -> SH256
   role: 'USER' | 'ADMIN' | 'GUEST';
   isActive: boolean;
+  sharedRoster: string;
+  guests: string;
   passwordResetToken?: string;
   passwordResetExpires?: Date;
   createdAt: Date;
   updateAt?: Date;
-
-  // Guests: string[];
-  inviteFor: string;
 
   fullName: string;
   profile: UserProfileType;
@@ -23,10 +22,12 @@ export interface UserDocument extends Document {
 };
 
 const UserSchema = new Schema({
-  // Guests: [{
-  //   type: String
-  // }],  // -> Invitados
-  inviteFor: String, // -> Quien me invito
+  sharedRoster: {
+    type: Schema.Types.Array
+  },
+  guests: {
+    type: Schema.Types.Array
+  },
   firstName: {
     type: String,
     required: [true, 'Please provide a first name'],
@@ -89,7 +90,7 @@ UserSchema.virtual('fullName').get(function fullName(this: UserDocument) {
 });
 
 UserSchema.virtual('profile').get(function profile(this: UserDocument) {
-  const { id, firstName, lastName, email, role, createdAt, isActive } = this;
+  const { id, firstName, lastName, email, role, createdAt, isActive, sharedRoster } = this;
   return {
     id,
     firstName,
@@ -97,7 +98,8 @@ UserSchema.virtual('profile').get(function profile(this: UserDocument) {
     email,
     role,
     createdAt,
-    isActive
+    isActive,
+    sharedRoster
   };
 });
 

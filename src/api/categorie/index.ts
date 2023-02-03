@@ -4,8 +4,8 @@ import { handleAllGetCategorie,
   handleDeleteCategorie,
   handleGetCategorie,
   handleUpdateCategorie
-} from "./categorie.controller";
-import { isAuthenticated } from "../../auth/auth.service";
+} from "./categorie.controller.js";
+import { isAuthenticated } from "../../auth/auth.service.js";
 
 const router = Router();
 

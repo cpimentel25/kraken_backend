@@ -5,10 +5,13 @@ import {
   deleteUser,
   getAllUsers,
   getUserById,
+  guestUser,
+  updateGuestsRoster,
+  updateGuestsUser,
   updateUser
-} from "./user.services";
+} from "./user.services.js";
 import * as dotenv from 'dotenv';
-import logger from "../../logger";
+import logger from "../../logger/index.js";
 
 dotenv.config();
 
@@ -51,6 +54,23 @@ export async function handleUpdateUsers(req: Request, res: Response) {
   const data = req.body;
   try {
     const user = await updateUser(id, data);
+    return res.status(201).json(user);
+  } catch (error: any) {
+    return res.status(500).json(error.message);
+  }
+};
+
+export async function handleGuestsUsers(req: Request, res: Response) {
+  const { id } = req.params;
+  const data = req.body;
+  const { email, roster } = data;
+  try {
+    const user = await guestUser(email, roster);
+    const userOwned = await updateGuestsUser(id, user);
+    const guestsRoster = await updateGuestsRoster(roster, user);
+
+    // console.log('find user: ', guestsRoster);
+
     return res.status(201).json(user);
   } catch (error: any) {
     return res.status(500).json(error.message);

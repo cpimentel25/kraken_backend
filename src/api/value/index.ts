@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { isAuthenticated, hasRole } from "../../auth/auth.service";
+import { isAuthenticated, hasRole } from "../../auth/auth.service.js";
 import {
   handleAllGetData,
   handleCreateValue,
   handleDeleteValue,
   handleGetValue,
   handleUpdateValue
-} from "./value.controllet";
+} from "./value.controllet.js";
 
 const router = Router();
 

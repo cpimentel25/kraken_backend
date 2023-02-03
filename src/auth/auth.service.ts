@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { UserDocument } from "../api/user/user.model";
-import { getUser } from "../api/user/user.services";
-import { AuthRequest, Roles } from "./auth.types";
+import { UserDocument } from "../api/user/user.model.js";
+import { getUser } from "../api/user/user.services.js";
+import { AuthRequest, Roles } from "./auth.types.js";
 
 const SECRET = process.env.TOKEN_SECRET as string
 
@@ -59,6 +59,8 @@ export async function isAuthenticated(req: AuthRequest, res: Response, next: Nex
   };
 
   req.user = user;
+
+  // console.log('user Authenticated: ', user);
 
   next();
   return true;

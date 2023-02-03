@@ -1,5 +1,5 @@
 import { DocumentDefinition, FilterQuery } from "mongoose";
-import Categorie, { CategorieDocument } from "./categorie.model";
+import Categorie, { CategorieDocument } from "./categorie.model.js";
 
 export function getAllCategorie(id: string) {
   const filter = { 'createdBy': id };

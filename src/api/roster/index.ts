@@ -1,13 +1,14 @@
 import { Router } from "express";
-import { isAuthenticated } from "../../auth/auth.service";
 import {
+  getLastFive,
   getLastValue,
   getTotalValues,
   handleCreateRoster,
   handleGetAllRoster,
   handleGetAllValuesRoster,
   handleGetValueRoster
-} from "./roster.controller";
+} from "./roster.controller.js";
+import { isAuthenticated } from "../../auth/auth.service.js";
 
 const router = Router();
 
@@ -25,6 +26,9 @@ router.get('/values/total/:id', isAuthenticated, getTotalValues)
 
 // Get /api/roster/lastvalue/:id --> [last value of roster id]
 router.get('/lastvalue/:id', isAuthenticated, getLastValue);
+
+// Get /api/roster/lastfive/:id --> [last 5 values of roster id]
+router.get('/lastfive/:id', isAuthenticated, getLastFive);
 
 // Post /api/roster/
 router.post('/',isAuthenticated, handleCreateRoster);

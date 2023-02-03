@@ -1,5 +1,5 @@
 import mongoose, { DocumentDefinition } from "mongoose";
-import Roster, { RosterDocument } from "./roster.model";
+import Roster, { RosterDocument } from "./roster.model.js";
 
 export function getAllRoster(id: string) {
   const filter = { 'createdBy': id };
@@ -8,6 +8,15 @@ export function getAllRoster(id: string) {
     .sort({ title: 1 })
     .populate({ path: 'createdBy', select: { firstName: 1, lastName: 1, email: 1 } });
 };
+
+export function getAllSharedRoster(id: string) {
+  // const filter = { 'guests': { 'email': 'jg_test@kraken.com' }};
+  // const filter = { "guests": { "_id": id, "firstName": "Juan", "lastName": "Gomez","email": "jg_test@kraken.com" }}};
+  const filter = { 'guests': { '_id': id }};
+
+  return Roster
+    .find(filter);
+}
 
 export function postCreateRoster(
   input: DocumentDefinition<Omit<RosterDocument, 'createdAt' | 'updateAt'>>
@@ -60,4 +69,17 @@ export function getLastValueRoster(userId: string, id: string) {
     .findOne(filter)
     .select({ values: 1, Guests: 0, _id: 0, createdAt: 0, updatedAt: 0, title: 0, createdBy: 0 })
     .slice('values', -1);
-}
+};
+
+export function getLastFiveRoster(userId: string, id: string) {
+  const filter = {
+    '_id': id,
+    'createdBy': userId
+  };
+
+  return Roster
+    .findOne(filter)
+    .select({ values: 1 })
+    .slice('values', -5)
+    .sort({ value: 1 })
+};
