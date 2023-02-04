@@ -1,6 +1,6 @@
 import { DocumentDefinition } from "mongoose";
-import Value, { ValueDocument } from "./value.model.js";
-import Roster from "../roster/roster.model.js";
+import Value, { ValueDocument } from "./value.model";
+import Roster from "../roster/roster.model";
 
 export function getAllValue(id: string) {
   const filter = { 'createdBy': id }; // -> Filter {Working!}

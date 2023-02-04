@@ -9,9 +9,9 @@ import {
   updateGuestsRoster,
   updateGuestsUser,
   updateUser
-} from "./user.services.js";
+} from "./user.services";
 import * as dotenv from 'dotenv';
-import logger from "../../logger/index.js";
+import logger from "../../logger/index";
 
 dotenv.config();
 

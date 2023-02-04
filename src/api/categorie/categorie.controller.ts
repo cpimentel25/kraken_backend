@@ -6,10 +6,10 @@ import {
   getAllCategorie,
   getCategorieById,
   updateCategorie
-} from "./categorie.services.js";
+} from "./categorie.services";
 import * as dotenv from 'dotenv';
-import { AuthRequest } from "../../auth/auth.types.js";
-import logger from "../../logger/index.js";
+import { AuthRequest } from "../../auth/auth.types";
+import logger from "../../logger/index";
 
 dotenv.config();
 
