@@ -5,8 +5,8 @@ import { handleAllGetUsers,
   handleGetUsers,
   handleGuestsUsers,
   handleUpdateUsers,
-} from "./user.controller.js";
-import { isAuthenticated } from "../../auth/auth.service.js";
+} from "./user.controller";
+import { isAuthenticated } from "../../auth/auth.service";
 
 const router = Router();
 

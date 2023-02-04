@@ -6,7 +6,7 @@ export interface ValueDocument extends Document {
   currency: string;
   categorie: string;
   description: string;
-  createdBy: ObjectId; // -> string to ObjectId
+  createdBy: ObjectId;
   createdAt: Date;
   updateAt?: Date;
 };

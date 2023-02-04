@@ -1,5 +1,5 @@
 import mongoose, { DocumentDefinition } from "mongoose";
-import Roster, { RosterDocument } from "./roster.model.js";
+import Roster, { RosterDocument } from "./roster.model";
 
 export function getAllRoster(id: string) {
   const filter = { 'createdBy': id };
@@ -82,4 +82,9 @@ export function getLastFiveRoster(userId: string, id: string) {
     .select({ values: 1 })
     .slice('values', -5)
     .sort({ value: 1 })
+};
+
+// GraphQl ->
+export function getRosters() {
+  return Roster.find();
 };

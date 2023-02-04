@@ -7,8 +7,8 @@ import {
   handleGetAllRoster,
   handleGetAllValuesRoster,
   handleGetValueRoster
-} from "./roster.controller.js";
-import { isAuthenticated } from "../../auth/auth.service.js";
+} from "./roster.controller";
+import { isAuthenticated } from "../../auth/auth.service";
 
 const router = Router();
 

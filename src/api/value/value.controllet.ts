@@ -7,9 +7,9 @@ import {
   getValueById,
   updateRosterValue,
   updateValue
-} from "./value.services.js";
-import { AuthRequest } from "../../auth/auth.types.js";
-import logger from "../../logger/index.js";
+} from "./value.services";
+import { AuthRequest } from "../../auth/auth.types";
+import logger from "../../logger/index";
 
 export async function handleAllGetData(req: AuthRequest, res: Response) {
   const id = req.user?._id;

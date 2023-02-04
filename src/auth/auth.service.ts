@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { UserDocument } from "../api/user/user.model.js";
-import { getUser } from "../api/user/user.services.js";
-import { AuthRequest, Roles } from "./auth.types.js";
+import { UserDocument } from "../api/user/user.model";
+import { getUser } from "../api/user/user.services";
+import { AuthRequest, Roles } from "./auth.types";
 
 const SECRET = process.env.TOKEN_SECRET as string
 

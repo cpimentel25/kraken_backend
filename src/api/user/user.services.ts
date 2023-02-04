@@ -1,6 +1,6 @@
 import { DocumentDefinition, FilterQuery } from "mongoose";
-import User, { UserDocument } from "./user.model.js";
-import Roster from "../roster/roster.model.js";
+import User, { UserDocument } from "./user.model";
+import Roster from "../roster/roster.model";
 
 export function getAllUsers() {
   return User.find({}, { password: 0 }).sort({ createdAt: -1 });

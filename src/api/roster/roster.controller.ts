@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
-import { AuthRequest } from '../../auth/auth.types.js';
+import { AuthRequest } from '../../auth/auth.types';
 import { NextFunction, Request, Response } from 'express';
-import logger from '../../logger/index.js';
+import logger from '../../logger/index';
 import {
   getAllRoster,
   getAllSharedRoster,
@@ -11,7 +11,7 @@ import {
   getRosterTotalValues,
   getValueRoster,
   postCreateRoster
-} from './roster.services.js';
+} from './roster.services';
 
 dotenv.config();
 
