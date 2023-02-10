@@ -1,10 +1,8 @@
 type Query {
   "Fetches an array of Rosters"
   rosters(createdBy: ID!): [Roster] # A list of Roster Owned
-
   "Fetches an array of Rosters Guests"
   allRosterByGuest(id: ID!): [Roster] # A list of Roster Guest
-
   rostersByGuests: [Roster]
 }
 

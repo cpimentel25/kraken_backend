@@ -11,7 +11,7 @@ import {
 import { AuthRequest } from "../../auth/auth.types";
 import logger from "../../logger/index";
 
-export async function handleAllGetData(req: AuthRequest, res: Response) {
+export async function handleAllGetValues(req: AuthRequest, res: Response) {
   const id = req.user?._id;
   try {
     const value = await getAllValue(id);

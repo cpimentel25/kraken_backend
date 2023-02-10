@@ -4,7 +4,7 @@ import Roster, { RosterDocument } from "./roster.model";
 export function getAllRoster(id: string) {
   const filter = { 'createdBy': id };
   return Roster
-    .find(filter, { values: 0 })
+    .find(filter)
     .sort({ title: 1 })
     .populate({ path: 'createdBy', select: { firstName: 1, lastName: 1, email: 1 } });
 };

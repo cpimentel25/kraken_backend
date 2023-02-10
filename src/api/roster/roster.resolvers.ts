@@ -6,12 +6,12 @@ const query = {
     return rosters;
   },
   allRostersByCreated: async (_parent: any, args: any) => {
-    const { id } = args;
-    const rosters = await getAllRoster(id);
+    const { createdBy } = args;
+    const rosters = await getAllRoster(createdBy);
     return rosters;
   },
 }
 
 export default {
-  query
+  query,
 };

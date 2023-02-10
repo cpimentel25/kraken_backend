@@ -4,10 +4,11 @@ import logger from "../logger";
 import typeDefs from "../graphql/typeDefs";
 import resolvers from "../graphql/resolvers";
 import { MyContext } from "..";
+import { Server } from "http";
 
 // import { readFileSync } from "fs";
 
-async function graphQlConfig(httpServer: any) {
+async function graphQlConfig(httpServer: Server) {
   // const typeDefs = readFileSync('../src/graphql/schema.graphql', { encoding: 'utf-8' });
   try {
     const server = new ApolloServer<MyContext>({
@@ -19,14 +20,11 @@ async function graphQlConfig(httpServer: any) {
     await server.start();
     logger.info('GraphsQl Server ~ started');
 
-    // Modified server startup
-    // await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
-    // console.log(`🚀 Server ready at http://localhost:4000/`);
-
     return server;
 
   } catch (error) {
-    logger.error('Error starting ~ GraphsQl Server', error)
+    console.log(error)
+    console.error('Error starting ~ GraphsQl Server', error)
     process.exit(1)
   }
 }

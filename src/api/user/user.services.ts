@@ -16,9 +16,9 @@ export function getUser(filter: FilterQuery<UserDocument>) {
   return user;
 };
 
-// export function getUserByField(field, value: string) {
-//   return User.find({ email: value });
-// }
+export function getUserByEmail(email: string) {
+  return User.find({'email': email });
+}
 
 export function createUser(
   input: DocumentDefinition<Omit<UserDocument, 'createdAt' | 'updateAt'>>
