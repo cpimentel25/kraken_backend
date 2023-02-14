@@ -9,6 +9,14 @@ export function getAllRoster(id: string) {
     .populate({ path: 'createdBy', select: { firstName: 1, lastName: 1, email: 1 } });
 };
 
+export function updateRoster(
+  id: string,
+  roster: DocumentDefinition<Omit<RosterDocument, 'createdAt' | 'updateAt'>>
+  ) {
+  const updateRoster = Roster.findByIdAndUpdate(id, roster, { new: true });
+  return updateRoster;
+}
+
 export function getAllSharedRoster(id: string) {
   // const filter = { 'guests': { 'email': 'jg_test@kraken.com' }};
   // const filter = { "guests": { "_id": id, "firstName": "Juan", "lastName": "Gomez","email": "jg_test@kraken.com" }}};

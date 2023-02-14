@@ -10,7 +10,8 @@ import {
   getLastValueRoster,
   getRosterTotalValues,
   getValueRoster,
-  postCreateRoster
+  postCreateRoster,
+  updateRoster
 } from './roster.services';
 
 dotenv.config();
@@ -31,21 +32,18 @@ export async function handleGetAllRoster(req: AuthRequest, res: Response) {
   }
 };
 
-// export async function handleGetAllSharedRoster(req: AuthRequest, res: Response, next: NextFunction) {
-//   const id = req.user?._id;
-
-//   try {
-//     const rosters = await getAllSharedRoster(id);
-//     console.log('shared Roster: ', rosters)
-//     res.status(200).json(rosters);
-//   } catch (error) {
-//     logger.error('handleGetAllSharedRoster ~ error', error)
-//     return res.status(500).json(error);
-//   }
-
-//   next()
-//   return true;
-// }
+export async function handleUpdateRoster(req: AuthRequest, res: Response) {
+  const { id } = req.params;
+  const data = req.body;
+  try {
+    const rosterUpdate = await updateRoster(id, data);
+    console.log('Update Roster: ', rosterUpdate)
+    res.status(200).json(rosterUpdate);
+  } catch (error: any) {
+    logger.error(' ~ error', error)
+    return res.status(500).json(error);
+  }
+}
 
 export async function handleCreateRoster(req: Request, res: Response) {
   const data = req.body;

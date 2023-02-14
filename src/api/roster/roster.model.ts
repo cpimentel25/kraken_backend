@@ -5,6 +5,7 @@ export interface RosterDocument extends Document {
   createdBy: ObjectId;
   values: string;
   guests: string;
+  categories: string;
 
   createdAt: Date;
   updateAt?: Date;
@@ -25,7 +26,10 @@ const RosterSchema = new Schema({
     ref: 'Value'
   },
   guests: {
-    type: Schema.Types.Array
+    type: Schema.Types.Array,
+  },
+  categories: {
+    type: Schema.Types.Array,
   },
 }, {
   timestamps: true,
