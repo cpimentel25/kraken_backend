@@ -6,7 +6,8 @@ import {
   handleCreateRoster,
   handleGetAllRoster,
   handleGetAllValuesRoster,
-  handleGetValueRoster
+  handleGetValueRoster,
+  handleUpdateRoster
 } from "./roster.controller";
 import { isAuthenticated } from "../../auth/auth.service";
 
@@ -14,6 +15,9 @@ const router = Router();
 
 // Get /api/roster/
 router.get('/', isAuthenticated, handleGetAllRoster);
+
+// Patch /api/roster/:id
+router.patch('/:id', isAuthenticated, handleUpdateRoster);
 
 // Get /api/roster/values
 router.get('/values', isAuthenticated, handleGetAllValuesRoster);
