@@ -3,6 +3,7 @@ import { AuthRequest } from '../../auth/auth.types';
 import { NextFunction, Request, Response } from 'express';
 import logger from '../../logger/index';
 import {
+  deleteRoster,
   getAllRoster,
   getAllSharedRoster,
   getAllValuesRoster,
@@ -40,7 +41,18 @@ export async function handleUpdateRoster(req: AuthRequest, res: Response) {
     console.log('Update Roster: ', rosterUpdate)
     res.status(200).json(rosterUpdate);
   } catch (error: any) {
-    logger.error(' ~ error', error)
+    logger.error('handleUpdateRoster ~ error', error)
+    return res.status(500).json(error);
+  }
+}
+
+export async function handleDeleteRoster(req: AuthRequest, res: Response) {
+  const { id } = req.params;
+  try {
+    const rosterDelete = await deleteRoster(id);
+    res.status(200).json(rosterDelete);
+  } catch (error) {
+    logger.error('handleDeleteRoster ~ error', error)
     return res.status(500).json(error);
   }
 }

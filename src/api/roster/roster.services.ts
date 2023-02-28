@@ -15,6 +15,10 @@ export function updateRoster(
   ) {
   const updateRoster = Roster.findByIdAndUpdate(id, roster, { new: true });
   return updateRoster;
+};
+
+export function deleteRoster(id: string) {
+  return Roster.findByIdAndDelete(id);
 }
 
 export function getAllSharedRoster(id: string) {
@@ -24,7 +28,7 @@ export function getAllSharedRoster(id: string) {
 
   return Roster
     .find(filter);
-}
+};
 
 export function postCreateRoster(
   input: DocumentDefinition<Omit<RosterDocument, 'createdAt' | 'updateAt'>>

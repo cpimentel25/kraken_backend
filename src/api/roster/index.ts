@@ -4,6 +4,7 @@ import {
   getLastValue,
   getTotalValues,
   handleCreateRoster,
+  handleDeleteRoster,
   handleGetAllRoster,
   handleGetAllValuesRoster,
   handleGetValueRoster,
@@ -18,6 +19,9 @@ router.get('/', isAuthenticated, handleGetAllRoster);
 
 // Patch /api/roster/:id
 router.patch('/:id', isAuthenticated, handleUpdateRoster);
+
+// Delete /api/roster/:id
+router.delete('/:id', isAuthenticated, handleDeleteRoster)
 
 // Get /api/roster/values
 router.get('/values', isAuthenticated, handleGetAllValuesRoster);
