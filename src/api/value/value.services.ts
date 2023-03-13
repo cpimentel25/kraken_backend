@@ -91,6 +91,31 @@ export function getAllValueById(rosterId: string, pagination: Pagination, catego
     .sort({ createdAt: -1 });
 };
 
+export function getValuesById(rosterId: string) {
+  const filter = {
+    'roster': rosterId,
+    // 'categorie': categorie,
+    // 'value': { $gte: rangeValue.min, $lte: rangeValue.max },
+    // 'createdBy': createdBy,
+    // 'createdAt': { $lt: createdAt }
+  };
+  return Value
+    .find(filter)
+    .sort({ createdAt: -1 });
+};
+
+export function getValuesForCharts(rosterId: string, categorie: string, createdBy: string, createdAt: number) {
+  const filter = {
+    'roster': rosterId,
+    'categorie': categorie,
+    'createdBy': createdBy,
+    'createdAt': { $lt: createdAt }
+  };
+  return Value
+    .find(filter)
+    .sort({ createdAt: -1 });
+};
+
 export function getAllValuesDiferents(rosterId: string) {
   const filter = {
     'roster': { $ne: rosterId }, //diferentes al id

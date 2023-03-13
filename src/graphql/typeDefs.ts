@@ -64,10 +64,14 @@ const typeDefs = `#graphql
     allUsers: [Users!]
     "Fetches an array of all values by created and roster id"
     allValues(roster: String! pagination: Pagination categorie: [String] rangeValue: RangeValue createdBy: [String] createdAt: Date): [Value!] # A list of Values by craeted user and roster owned
+    "Fetches an array of all values by created and roster id for Charts"
+    allValuesForCharts(roster: String! categorie: [String] rangeValue: RangeValue createdBy: [String] createdAt: Date): [Value!] # A list of Values by craeted user and roster owned
     "Fetches an array all rosters by created user"
     allRostersByCreated(createdBy: String!): [Roster] # A list of Roster by created user
     ""
     userByEmail(email: String): [Users] # Return find user by email or false
+    ""
+    values(roster: String! offset: Int limit: Int): [Value!]
   }
 `;
 

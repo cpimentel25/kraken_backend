@@ -11,10 +11,19 @@ export function getAllRoster(id: string) {
 
 export function updateRoster(
   id: string,
+  email: string,
   roster: DocumentDefinition<Omit<RosterDocument, 'createdAt' | 'updateAt'>>
   ) {
-  const updateRoster = Roster.findByIdAndUpdate(id, roster, { new: true });
+  const update = {
+    $push: { guests: email }
+  }
+
+  const updateRoster = Roster.findByIdAndUpdate(id, update, { new: true });
   return updateRoster;
+};
+
+export function deleteRoster(id: string) {
+  return Roster.findByIdAndDelete(id);
 }
 
 export function getAllSharedRoster(id: string) {
@@ -24,7 +33,7 @@ export function getAllSharedRoster(id: string) {
 
   return Roster
     .find(filter);
-}
+};
 
 export function postCreateRoster(
   input: DocumentDefinition<Omit<RosterDocument, 'createdAt' | 'updateAt'>>
