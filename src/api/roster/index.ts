@@ -8,7 +8,8 @@ import {
   handleGetAllRoster,
   handleGetAllValuesRoster,
   handleGetValueRoster,
-  handleUpdateRoster
+  handleUpdateRoster,
+  handleUpdateRosterGuest
 } from "./roster.controller";
 import { isAuthenticated } from "../../auth/auth.service";
 
@@ -20,8 +21,11 @@ router.get('/', isAuthenticated, handleGetAllRoster);
 // Patch /api/roster/:id
 router.patch('/:id', isAuthenticated, handleUpdateRoster);
 
+// Patch /api/roster/guests/:id
+router.patch('/:id', isAuthenticated, handleUpdateRosterGuest);
+
 // Delete /api/roster/:id
-router.delete('/:id', isAuthenticated, handleDeleteRoster)
+router.delete('/:id', isAuthenticated, handleDeleteRoster);
 
 // Get /api/roster/values
 router.get('/values', isAuthenticated, handleGetAllValuesRoster);

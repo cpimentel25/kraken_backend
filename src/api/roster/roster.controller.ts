@@ -36,8 +36,22 @@ export async function handleGetAllRoster(req: AuthRequest, res: Response) {
 export async function handleUpdateRoster(req: AuthRequest, res: Response) {
   const { id } = req.params;
   const data = req.body;
+  const { email, roster } = data;
   try {
-    const rosterUpdate = await updateRoster(id, data);
+    const rosterUpdate = await updateRoster(id, email, roster);
+    console.log('Update Roster: ', rosterUpdate)
+    res.status(200).json(rosterUpdate);
+  } catch (error: any) {
+    logger.error('handleUpdateRoster ~ error', error)
+    return res.status(500).json(error);
+  }
+}
+export async function handleUpdateRosterGuest(req: AuthRequest, res: Response) {
+  const { id } = req.params;
+  const data = req.body;
+  const { email, roster } = data;
+  try {
+    const rosterUpdate = await updateRoster(id, email, roster);
     console.log('Update Roster: ', rosterUpdate)
     res.status(200).json(rosterUpdate);
   } catch (error: any) {

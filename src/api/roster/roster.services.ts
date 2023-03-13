@@ -11,9 +11,14 @@ export function getAllRoster(id: string) {
 
 export function updateRoster(
   id: string,
+  email: string,
   roster: DocumentDefinition<Omit<RosterDocument, 'createdAt' | 'updateAt'>>
   ) {
-  const updateRoster = Roster.findByIdAndUpdate(id, roster, { new: true });
+  const update = {
+    $push: { guests: email }
+  }
+
+  const updateRoster = Roster.findByIdAndUpdate(id, update, { new: true });
   return updateRoster;
 };
 
