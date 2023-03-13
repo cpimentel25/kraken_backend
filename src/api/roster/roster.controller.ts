@@ -19,14 +19,17 @@ dotenv.config();
 
 export async function handleGetAllRoster(req: AuthRequest, res: Response) {
   const id = req.user?._id;
+  const email = req.user?.email;
   try {
-    const sharedRoster = getAllSharedRoster(id);
+    const sharedRoster = await getAllSharedRoster(email);
     // console.log('Shared Roster: ', sharedRoster);
 
     const roster = await getAllRoster(id);
     // console.log('Roster owned: ', roster);
 
-    return res.status(200).json(roster);
+    const newRoster = roster.concat(sharedRoster)
+
+    return res.status(200).json(newRoster);
   } catch (error) {
     logger.error('handleGetAllRoster ~ error', error)
     return res.status(500).json(error);
