@@ -26,10 +26,8 @@ export function deleteRoster(id: string) {
   return Roster.findByIdAndDelete(id);
 }
 
-export function getAllSharedRoster(id: string) {
-  // const filter = { 'guests': { 'email': 'jg_test@kraken.com' }};
-  // const filter = { "guests": { "_id": id, "firstName": "Juan", "lastName": "Gomez","email": "jg_test@kraken.com" }}};
-  const filter = { 'guests': { '_id': id }};
+export function getAllSharedRoster(email: any) {
+  const filter = { 'guests':  email };
 
   return Roster
     .find(filter);
@@ -91,7 +89,7 @@ export function getLastValueRoster(userId: string, id: string) {
 export function getLastFiveRoster(userId: string, id: string) {
   const filter = {
     '_id': id,
-    'createdBy': userId
+    // 'createdBy': userId
   };
 
   return Roster
