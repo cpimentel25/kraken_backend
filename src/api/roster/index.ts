@@ -22,7 +22,7 @@ router.get('/', isAuthenticated, handleGetAllRoster);
 router.patch('/:id', isAuthenticated, handleUpdateRoster);
 
 // Patch /api/roster/guests/:id
-router.patch('/:id', isAuthenticated, handleUpdateRosterGuest);
+router.patch('/guests/:id', isAuthenticated, handleUpdateRosterGuest);
 
 // Delete /api/roster/:id
 router.delete('/:id', isAuthenticated, handleDeleteRoster);
