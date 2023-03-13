@@ -57,7 +57,7 @@ export function getValueRoster(userId: string, id: string) {
 export function getRosterTotalValues(userId: string, id: string) {
   const filter = {
     _id: new mongoose.Types.ObjectId(id),
-    createdBy: userId
+    // createdBy: userId
   }
   const result = Roster
     .aggregate([
@@ -78,7 +78,7 @@ export function getRosterTotalValues(userId: string, id: string) {
 export function getLastValueRoster(userId: string, id: string) {
   const filter = {
     '_id': id,
-    'createdBy': userId
+    // 'createdBy': userId
   }
   return Roster
     .findOne(filter)
